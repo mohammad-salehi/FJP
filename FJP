@@ -1,0 +1,1073 @@
+package com.company;
+import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import static java.awt.Font.SERIF;
+
+public class Main {
+    public static void main(String[] args) {
+        zamin z=new zamin();
+    }
+}
+class zamin
+{
+    Boolean click=false;
+    tiger tiger1=new tiger();
+    tiger tiger2=new tiger();
+    int score1=3;
+    int score2=3;
+    public Boolean getClick() {
+        return click;
+    }
+    public void setClick(Boolean click) {
+        this.click = click;
+    }
+    elephant elephant1=new elephant();
+    elephant elephant2=new elephant();
+    horse horse1=new horse();
+    horse horse2=new horse();
+    int move=20;
+    public int getMove() {
+        return move;
+    }
+
+    public void setMove() {
+        this.move = move-1;
+    }
+
+    int x;
+    int y;
+    int code;
+    boolean[][] hasmohre=new boolean[3][3];
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+    int r;
+    double g;
+    zamin()
+    {
+        g= Math.random()*10;
+        r= (int) (g%10);
+        r=(r%2);
+        tiger1.setX(0);
+        tiger1.setY(2);
+        tiger2.setX(2);
+        tiger2.setY(2);
+        horse1.setX(0);
+        horse1.setY(1);
+        horse2.setX(2);
+        horse2.setY(1);
+        elephant1.setX(0);
+        elephant1.setY(0);
+        elephant2.setX(2);
+        elephant2.setY(0);
+        final JFrame f =new JFrame();
+        f.setLayout(null);
+        f.setTitle("Java Project");
+        JProgressBar bar =new JProgressBar(0,100);
+        bar.setBounds(215,350,200,30);
+        bar.setStringPainted(true);
+        f.add(bar);
+        JLabel load=new JLabel("Loading...");
+        load.setBounds(215,320,500,30);
+        f.add(load);
+        JLabel title=new JLabel("This Game is made by Mohammad Salehi.");
+        title.setBounds(30,30,300,30);
+        title.setFont(Font.getFont(SERIF));
+        f.add(title);
+        JLabel title1=new JLabel("Horse can kill the other horse and can move one place");
+        title1.setBounds(30,60,600,30);
+        title1.setFont(Font.getFont(SERIF));
+        f.add(title1);
+        JLabel title2=new JLabel("Tiger can kill the horse and elephant and other tigher and can move one place");
+        title2.setBounds(30,90,1200,30);
+        title2.setFont(Font.getFont(SERIF));
+        f.add(title2);
+        JLabel title3=new JLabel("Elephant can kill the horse and other elephant and can move two places");
+        title3.setBounds(30,120,900,30);
+        title3.setFont(Font.getFont(SERIF));
+        f.add(title3);
+        JLabel title4=new JLabel("after 20 moves the game will be end.");
+        title4.setBounds(30,150,300,30);
+        title4.setFont(Font.getFont(SERIF));
+        f.add(title4);
+        f.setSize(631,660);
+        f.setVisible(true);
+        for(int i=0;i<=100;i++)
+        {
+            bar.setValue(i);
+            try {
+                Thread.sleep(240);
+            } catch (Exception e) {
+
+            }
+        }
+        bar.setVisible(false);
+        load.setVisible(false);
+        title.setVisible(false);
+        title4.setVisible(false);
+        title3.setVisible(false);
+        title2.setVisible(false);
+        title1.setVisible(false);
+        final JButton[][] khane=new JButton[3][3];
+        String mohre[][]=new String[3][3];
+        mohre[0][1]="horse(1)";
+        mohre[2][1]="horse(2)";
+        mohre[0][0]="elephant(1)";
+        mohre[2][0]="elephant(2)";
+        mohre[0][2]="tiger(1)";
+        mohre[2][2]="tiger(2)";
+        hasmohre[0][0]=true;
+        hasmohre[0][1]=true;
+        hasmohre[0][2]=true;
+        hasmohre[2][0]=true;
+        hasmohre[2][1]=true;
+        hasmohre[2][2]=true;
+        hasmohre[1][0]=false;
+        hasmohre[1][1]=false;
+        hasmohre[1][2]=false;
+        for(int i=0;i<3;i++)
+        {
+            for(int j=0;j<3;j++)
+
+            {
+                khane[i][j]=new JButton(mohre[i][j]);
+                khane[i][j].setBounds(5+(200*j),5+200*i,200,200);
+                khane[i][j].setFont(new Font("Serif", Font.BOLD, 24));
+                khane[i][j].setBackground(Color.lightGray);
+                f.add(khane[i][j]);
+            }
+        }
+        if(r==1)
+        {
+
+            if(elephant1.isD()==false)
+            {
+                khane[elephant1.getX()][elephant1.getY()].setBackground(Color.cyan);
+            }
+            if(tiger1.isD()==false)
+            {
+                khane[tiger1.getX()][tiger1.getY()].setBackground(Color.cyan);
+            }
+            if(horse1.isD()==false)
+            {
+
+                khane[horse1.getX()][horse1.getY()].setBackground(Color.cyan);
+            }
+        }
+        else
+        {
+            if(elephant2.isD()==false)
+            {
+                khane[elephant2.getX()][elephant2.getY()].setBackground(Color.cyan);
+            }
+            if(tiger2.isD()==false)
+            {
+
+                khane[tiger2.getX()][tiger2.getY()].setBackground(Color.cyan);
+            }
+            if(horse2.isD()==false)
+            {
+                khane[horse2.getX()][horse2.getY()].setBackground(Color.cyan);
+            }
+        }
+
+        for (int i=0;i<3;i++)
+        {
+            for(int j=0;j<3;j++)
+            {
+                final int finalI = i;
+                final int finalJ = j;
+                khane[i][j].addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+
+                        if(click==true)
+                        {
+                            g= Math.random()*10;
+                            r= (int) (g%10);
+                            r=(r%2);
+                            if(hasmohre[finalI][finalJ]==false)
+                            {
+                                if(code==1)
+
+                                {
+                                    if(Math.abs(getX()-finalI)+Math.abs(getY()-finalJ)<=elephant1.getmasafat()&&(Math.abs(getX()-finalI)==0||Math.abs(getY()-finalJ)==0))
+                                    {
+                                        hasmohre[getX()][getY()]=false;
+                                        elephant1.setX(finalI);
+                                        elephant1.setY(finalJ);
+                                        khane[getX()][getY()].setText(" ");
+                                        khane[finalI][finalJ].setText("elephant(1)");
+                                        khane[getX()][getY()].setBackground(Color.lightGray);
+                                        hasmohre[finalI][finalJ]=true;
+                                        setMove();
+                                    }
+                                    else
+
+                                    {
+                                        khane[getX()][getY()].setBackground(Color.lightGray);
+                                    }
+                                }
+                                if(code==2)
+                                {
+                                    if(Math.abs(getX()-finalI)+Math.abs(getY()-finalJ)<=horse1.getmasafat()&&(Math.abs(getX()-finalI)==0||Math.abs(getY()-finalJ)==0))
+                                    {
+                                        hasmohre[getX()][getY()]=false;
+
+                                        horse1.setX(finalI);
+                                        horse1.setY(finalJ);
+                                        khane[getX()][getY()].setText(" ");
+                                        khane[finalI][finalJ].setText("horse(1)");
+                                        khane[getX()][getY()].setBackground(Color.lightGray);
+                                        hasmohre[finalI][finalJ]=true;
+                                        setMove();
+                                    }
+                                    else
+                                    {
+                                        khane[getX()][getY()].setBackground(Color.lightGray);
+                                    }
+                                }
+
+                                if(code==3)
+                                {
+                                    if(Math.abs(getX()-finalI)+Math.abs(getY()-finalJ)<=tiger1.getmasafat()&&(Math.abs(getX()-finalI)==0||Math.abs(getY()-finalJ)==0))
+                                    {
+                                        hasmohre[getX()][getY()]=false;
+                                        tiger1.setX(finalI);
+                                        tiger1.setY(finalJ);
+                                        khane[getX()][getY()].setText(" ");
+                                        khane[finalI][finalJ].setText("tiger(1)");
+
+                                        khane[getX()][getY()].setBackground(Color.lightGray);
+                                        hasmohre[finalI][finalJ]=true;
+                                        setMove();
+                                    }
+                                    else
+                                    {
+                                        khane[getX()][getY()].setBackground(Color.lightGray);
+                                    }
+                                }
+                                if(code==4)
+                                {
+                                    if(Math.abs(getX()-finalI)+Math.abs(getY()-finalJ)<=elephant2.getmasafat()&&(Math.abs(getX()-finalI)==0||Math.abs(getY()-finalJ)==0))
+                                    {
+                                        hasmohre[getX()][getY()]=false;
+                                        elephant2.setX(finalI);
+                                        elephant2.setY(finalJ);
+                                        khane[getX()][getY()].setText(" ");
+                                        khane[finalI][finalJ].setText("elephant(2)");
+                                        khane[getX()][getY()].setBackground(Color.lightGray);
+                                        hasmohre[finalI][finalJ]=true;
+                                        setMove();
+                                    }
+                                    else
+                                    {
+                                        khane[getX()][getY()].setBackground(Color.lightGray);
+                                    }
+
+                                }
+                                if(code==5)
+                                {
+                                    if(Math.abs(getX()-finalI)+Math.abs(getY()-finalJ)<=horse2.getmasafat()&&(Math.abs(getX()-finalI)==0||Math.abs(getY()-finalJ)==0))
+                                    {
+                                        hasmohre[getX()][getY()]=false;
+                                        horse2.setX(finalI);
+                                        horse2.setY(finalJ);
+
+                                        khane[getX()][getY()].setText(" ");
+                                        khane[finalI][finalJ].setText("horse(2)");
+                                        khane[getX()][getY()].setBackground(Color.lightGray);
+                                        hasmohre[finalI][finalJ]=true;
+                                        setMove();
+
+                                    }
+                                    else
+                                    {
+                                        khane[getX()][getY()].setBackground(Color.lightGray);
+
+                                    }
+                                }
+                                if(code==6)
+                                {
+                                    if(Math.abs(getX()-finalI)+Math.abs(getY()-finalJ)<=tiger2.getmasafat()&&(Math.abs(getX()-finalI)==0||Math.abs(getY()-finalJ)==0))
+
+                                    {
+                                        hasmohre[getX()][getY()]=false;
+                                        tiger2.setX(finalI);
+                                        tiger2.setY(finalJ);
+                                        khane[getX()][getY()].setText(" ");
+                                        khane[finalI][finalJ].setText("tiger(2)");
+                                        khane[getX()][getY()].setBackground(Color.lightGray);
+                                        hasmohre[finalI][finalJ]=true;
+                                        setMove();
+                                    }
+                                    else
+                                    {
+                                        khane[getX()][getY()].setBackground(Color.lightGray);
+                                    }
+                                }
+                            }
+                            else
+
+                            {
+                                if(getCode()==1)
+                                {
+                                    if(Math.abs(getX()-finalI)+Math.abs(getY()-finalJ)<=elephant1.getmasafat()&&(Math.abs(getX()-finalI)==0||Math.abs(getY()-finalJ)==0))
+                                    {
+                                        if(horse2.getX()==finalI&&horse2.getY()==finalJ)
+                                        {
+                                            hasmohre[getX()][getY()]=false;
+                                            horse2.setD(true);
+
+                                            khane[getX()][getY()].setText(" ");
+                                            khane[finalI][finalJ].setText("elephant(1)");
+                                            khane[getX()][getY()].setBackground(Color.lightGray);
+                                            elephant1.setX(finalI);
+                                            elephant1.setY(finalJ);
+                                            horse2.setX(10);
+                                            horse2.setY(10);
+                                            score2--;
+                                            setMove();
+                                        }
+
+                                        else if (tiger2.getX()==finalI&&tiger2.getY()==finalJ)
+                                        {
+                                            khane[getX()][getY()].setBackground(Color.lightGray);
+                                        }
+                                        else if(elephant2.getX()==finalI&&elephant2.getY()==finalJ)
+                                        {
+                                            hasmohre[getX()][getY()]=false;
+                                            elephant2.setD(true);
+                                            khane[getX()][getY()].setText(" ");
+                                            khane[finalI][finalJ].setText("elephant(1)");
+
+                                            khane[getX()][getY()].setBackground(Color.lightGray);
+                                            elephant1.setX(finalI);
+                                            elephant1.setY(finalJ);
+                                            elephant2.setX(10);
+                                            elephant2.setY(10);
+                                            score2--;
+                                            setMove();
+
+                                        }
+                                        else
+                                        {
+                                            khane[getX()][getY()].setBackground(Color.lightGray);
+
+                                        }
+                                    }
+                                    else
+                                    {
+
+                                        khane[getX()][getY()].setBackground(Color.lightGray);
+                                    }
+                                }
+                                if(getCode()==2)
+                                {
+                                    if(Math.abs(getX()-finalI)+Math.abs(getY()-finalJ)<=horse1.getmasafat()&&(Math.abs(getX()-finalI)==0||Math.abs(getY()-finalJ)==0))
+                                    {
+                                        if(horse2.getX()==finalI&&horse2.getY()==finalJ)
+                                        {
+                                            hasmohre[getX()][getY()]=false;
+
+                                            horse2.setD(true);
+                                            khane[getX()][getY()].setText(" ");
+                                            khane[finalI][finalJ].setText("horse(1)");
+                                            khane[getX()][getY()].setBackground(Color.lightGray);
+                                            horse1.setX(finalI);
+                                            horse1.setY(finalJ);
+                                            horse2.setX(10);
+
+                                            horse2.setY(10);
+                                            score2--;
+                                            setMove();
+                                        }
+                                        else
+                                        {
+                                            khane[getX()][getY()].setBackground(Color.lightGray);
+                                        }
+                                    }
+                                    else
+                                    {
+
+                                        khane[getX()][getY()].setBackground(Color.lightGray);
+                                    }
+                                }
+                                if(getCode()==3)
+                                {
+                                    if(Math.abs(getX()-finalI)+Math.abs(getY()-finalJ)<=tiger1.getmasafat()&&(Math.abs(getX()-finalI)==0||Math.abs(getY()-finalJ)==0))
+                                    {
+                                        if(horse2.getX()==finalI&&horse2.getY()==finalJ)
+                                        {
+
+                                            hasmohre[getX()][getY()]=false;
+                                            horse2.setD(true);
+                                            khane[getX()][getY()].setText(" ");
+                                            khane[finalI][finalJ].setText("tiger(1)");
+                                            khane[getX()][getY()].setBackground(Color.lightGray);
+                                            tiger1.setX(finalI);
+
+                                            tiger1.setY(finalJ);
+                                            horse2.setX(10);
+                                            horse2.setY(10);
+                                            score2--;
+                                            setMove();
+                                        }
+                                        else if (elephant2.getX()==finalI&&elephant2.getY()==finalJ)
+                                        {
+
+                                            hasmohre[getX()][getY()]=false;
+                                            elephant2.setD(true);
+                                            khane[getX()][getY()].setText(" ");
+                                            khane[finalI][finalJ].setText("tiger(1)");
+                                            khane[getX()][getY()].setBackground(Color.lightGray);
+                                            tiger1.setX(finalI);
+                                            tiger1.setY(finalJ);
+                                            elephant2.setX(10);
+
+                                            elephant2.setY(10);
+                                            score2--;
+                                            setMove();
+                                        }else if(tiger2.getX()==finalI&&tiger2.getY()==finalJ)
+                                        {
+                                            hasmohre[getX()][getY()]=false;
+                                            tiger2.setD(true);
+                                            khane[getX()][getY()].setText(" ");
+                                            khane[finalI][finalJ].setText("tiger(1)");
+                                            khane[getX()][getY()].setBackground(Color.lightGray);
+
+
+                                            tiger1.setX(finalI);
+                                            tiger1.setY(finalJ);
+                                            tiger2.setX(10);
+                                            tiger2.setY(10);
+                                            score2--;
+                                            setMove();
+                                        }
+                                        else
+                                        {
+
+                                            khane[getX()][getY()].setBackground(Color.lightGray);
+                                        }
+                                    }
+                                    }
+                                    else
+                                    {
+
+                                        khane[getX()][getY()].setBackground(Color.lightGray);
+                                    }
+
+                                if(getCode()==4)
+                                {
+                                    if(Math.abs(getX()-finalI)+Math.abs(getY()-finalJ)<=elephant2.getmasafat()&&(Math.abs(getX()-finalI)==0||Math.abs(getY()-finalJ)==0))
+                                    {
+                                        if(horse1.getX()==finalI&&horse1.getY()==finalJ)
+                                        {
+                                            hasmohre[getX()][getY()]=false;
+
+                                            horse1.setD(true);
+
+                                            khane[getX()][getY()].setText(" ");
+                                            khane[finalI][finalJ].setText("elephant(2)");
+                                            khane[getX()][getY()].setBackground(Color.lightGray);
+                                            elephant2.setX(finalI);
+
+                                            elephant2.setY(finalJ);
+                                            horse1.setX(10);
+                                            horse1.setY(10);
+                                            score1--;
+                                            setMove();
+
+                                        }
+                                        else if (tiger2.getX()==finalI&&tiger2.getY()==finalJ)
+                                        {
+
+                                            khane[getX()][getY()].setBackground(Color.lightGray);
+                                        }
+                                        else if(elephant1.getX()==finalI&&elephant1.getY()==finalJ)
+                                        {
+                                            hasmohre[getX()][getY()]=false;
+                                            elephant1.setD(true);
+
+                                            khane[getX()][getY()].setText(" ");
+                                            khane[finalI][finalJ].setText("elephant(2)");
+                                            khane[getX()][getY()].setBackground(Color.lightGray);
+                                            elephant2.setX(finalI);
+                                            elephant2.setY(finalJ);
+                                            elephant1.setX(10);
+
+                                            elephant1.setY(10);
+                                            score1--;
+                                            setMove();
+                                        }
+                                        else
+                                        {
+                                            khane[getX()][getY()].setBackground(Color.lightGray);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        khane[getX()][getY()].setBackground(Color.lightGray);
+                                    }
+                                }
+                                if(getCode()==5)
+                                {
+                                    if(Math.abs(getX()-finalI)+Math.abs(getY()-finalJ)<=horse1.getmasafat()&&(Math.abs(getX()-finalI)==0||Math.abs(getY()-finalJ)==0))
+
+                                    {
+                                        if(horse1.getX()==finalI&&horse1.getY()==finalJ)
+
+                                        {
+                                            hasmohre[getX()][getY()]=false;
+                                            horse1.setD(true);
+                                            khane[getX()][getY()].setText(" ");
+                                            khane[finalI][finalJ].setText("horse(2)");
+                                            khane[getX()][getY()].setBackground(Color.lightGray);
+                                            horse2.setX(finalI);
+                                            horse2.setY(finalJ);
+                                            horse1.setX(10);
+                                            horse1.setY(10);
+                                            score1--;
+                                            setMove();
+                                        }
+                                        else
+                                        {
+                                            khane[getX()][getY()].setBackground(Color.lightGray);
+                                        }
+                                    }
+
+                                    else
+                                    {
+                                        khane[getX()][getY()].setBackground(Color.lightGray);
+                                    }
+                                }
+                                if(getCode()==6)
+                                {
+                                    if(Math.abs(getX()-finalI)+Math.abs(getY()-finalJ)<=horse1.getmasafat()&&(Math.abs(getX()-finalI)==0||Math.abs(getY()-finalJ)==0))
+
+                                    {
+                                        if(horse1.getX()==finalI&&horse1.getY()==finalJ)
+                                        {
+                                            hasmohre[getX()][getY()]=false;
+                                            horse1.setD(true);
+                                            khane[getX()][getY()].setText(" ");
+                                            khane[finalI][finalJ].setText("tiger(2)");
+                                            khane[getX()][getY()].setBackground(Color.lightGray);
+                                            tiger2.setX(finalI);
+                                            tiger2.setY(finalJ);
+
+                                            horse1.setX(10);
+                                            horse1.setY(10);
+                                            score1--;
+                                            setMove();
+                                        }
+                                        else if (elephant1.getX()==finalI&&elephant1.getY()==finalJ)
+                                        {
+                                            hasmohre[getX()][getY()]=false;
+                                            elephant1.setD(true);
+                                            khane[getX()][getY()].setText(" ");
+                                            khane[finalI][finalJ].setText("tiger(2)");
+
+                                            khane[getX()][getY()].setBackground(Color.lightGray);
+
+                                            tiger2.setX(finalI);
+                                            tiger2.setY(finalJ);
+                                            elephant1.setX(10);
+                                            elephant1.setY(10);
+                                            score1--;
+                                            setMove();
+                                        }else if(tiger1.getX()==finalI&&tiger1.getY()==finalJ)
+                                        {
+                                            hasmohre[getX()][getY()]=false;
+                                            tiger1.setD(true);
+                                            khane[getX()][getY()].setText(" ");
+                                            khane[finalI][finalJ].setText("tiger(2)");
+                                            khane[getX()][getY()].setBackground(Color.lightGray);
+                                            tiger2.setX(finalI);
+                                            tiger2.setY(finalJ);
+                                            tiger1.setX(10);
+
+                                            tiger1.setY(10);
+                                            score1--;
+                                            setMove();
+                                        }
+                                    }
+                                    else
+                                    {
+                                        khane[getX()][getY()].setBackground(Color.lightGray);
+                                    }
+
+                                }
+                            }
+                            if(r==1)
+                            {
+                                if(elephant1.isD()==false)
+                                {
+                                    khane[elephant1.getX()][elephant1.getY()].setBackground(Color.cyan);
+                                }
+
+                                if(tiger1.isD()==false)
+                                {
+                                    khane[tiger1.getX()][tiger1.getY()].setBackground(Color.cyan);
+
+                                }
+                                if(horse1.isD()==false)
+                                {
+                                    khane[horse1.getX()][horse1.getY()].setBackground(Color.cyan);
+                                }
+                            }
+                            else
+                            {
+                                if(elephant2.isD()==false)
+
+                                {
+                                    khane[elephant2.getX()][elephant2.getY()].setBackground(Color.cyan);
+                                }
+                                if(tiger2.isD()==false)
+                                {
+                                    khane[tiger2.getX()][tiger2.getY()].setBackground(Color.cyan);
+                                }
+                                if(horse2.isD()==false)
+                                {
+
+                                    khane[horse2.getX()][horse2.getY()].setBackground(Color.cyan);
+                                }
+                            }
+                        }
+                        if(click==false)
+                        {
+                            for(int i=0;i<3;i++)
+                            {
+
+                                for (int j=0;j<3;j++)
+                                {
+                                    khane[i][j].setBackground(Color.lightGray);
+                                }
+                            }
+                            if(hasmohre[finalI][finalJ]==true)
+                            {
+                                if(r==1)
+
+                                {
+                                    if(elephant1.getX()==finalI&&elephant1.getY()==finalJ)
+                                    {
+                                        setX(finalI);
+                                        setY(finalJ);
+                                        khane[finalI][finalJ].setBackground(Color.yellow);
+                                        setCode(1);
+                                    }
+
+                                    else if(horse1.getX()==finalI&&horse1.getY()==finalJ)
+                                    {
+                                        setX(finalI);
+                                        setY(finalJ);
+                                        khane[finalI][finalJ].setBackground(Color.yellow);
+                                        setCode(2);
+                                    }
+                                    else if(tiger1.getX()==finalI&&tiger1.getY()==finalJ)
+                                    {
+
+                                        setX(finalI);
+                                        setY(finalJ);
+                                        khane[finalI][finalJ].setBackground(Color.yellow);
+                                        setCode(3);
+
+                                    }else
+                                    {
+                                        JOptionPane.showMessageDialog(null,"nobate 1");
+
+                                        if(r==1)
+                                        {
+                                            if(elephant1.isD()==false)
+                                            {
+                                                khane[elephant1.getX()][elephant1.getY()].setBackground(Color.cyan);
+                                            }
+                                            if(tiger1.isD()==false)
+                                            {
+                                                khane[tiger1.getX()][tiger1.getY()].setBackground(Color.cyan);
+
+                                            }
+                                            if(horse1.isD()==false)
+                                            {
+                                                khane[horse1.getX()][horse1.getY()].setBackground(Color.cyan);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if(elephant2.isD()==false)
+                                            {
+                                                khane[elephant2.getX()][elephant2.getY()].setBackground(Color.cyan);
+                                            }
+                                            if(tiger2.isD()==false)
+                                            {
+                                                khane[tiger2.getX()][tiger2.getY()].setBackground(Color.cyan);
+                                            }
+                                            if(horse2.isD()==false)
+                                            {
+
+                                                khane[horse2.getX()][horse2.getY()].setBackground(Color.cyan);
+                                            }
+                                        }
+                                        click=true;
+                                    }
+                                }
+                                else
+                                {
+                                    if(elephant2.getX()==finalI&&elephant2.getY()==finalJ)
+                                    {
+                                        setX(finalI);
+
+                                        setY(finalJ);
+                                        khane[finalI][finalJ].setBackground(Color.yellow);
+                                        setCode(4);
+                                    }
+                                    else if(horse2.getX()==finalI&&horse2.getY()==finalJ)
+                                    {
+                                        setX(finalI);
+
+                                        setY(finalJ);
+                                        khane[finalI][finalJ].setBackground(Color.yellow);
+                                        setCode(5);
+                                    }
+                                    else if(tiger2.getX()==finalI&&tiger2.getY()==finalJ)
+                                    {
+                                        setX(finalI);
+                                        setY(finalJ);
+                                        khane[finalI][finalJ].setBackground(Color.yellow);
+                                        setCode(6);
+
+                                    }else
+                                    {
+                                        JOptionPane.showMessageDialog(null,"nobate 2");
+                                        if(r==1)
+                                        {
+                                            if(elephant1.isD()==false)
+                                            {
+                                                khane[elephant1.getX()][elephant1.getY()].setBackground(Color.cyan);
+                                            }
+                                            if(tiger1.isD()==false)
+                                            {
+                                                khane[tiger1.getX()][tiger1.getY()].setBackground(Color.cyan);
+                                            }
+                                            if(horse1.isD()==false)
+                                            {
+
+                                                khane[horse1.getX()][horse1.getY()].setBackground(Color.cyan);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if(elephant2.isD()==false)
+                                            {
+                                                khane[elephant2.getX()][elephant2.getY()].setBackground(Color.cyan);
+                                            }
+                                            if(tiger2.isD()==false)
+                                            {
+                                                khane[tiger2.getX()][tiger2.getY()].setBackground(Color.cyan);
+                                            }
+                                            if(horse2.isD()==false)
+                                            {
+                                                khane[horse2.getX()][horse2.getY()].setBackground(Color.cyan);
+                                            }
+                                        }
+                                        click=true;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if(r==1)
+                                {
+                                    if(elephant1.isD()==false)
+                                    {
+                                        khane[elephant1.getX()][elephant1.getY()].setBackground(Color.cyan);
+                                    }
+                                    if(tiger1.isD()==false)
+                                    {
+                                        khane[tiger1.getX()][tiger1.getY()].setBackground(Color.cyan);
+                                    }
+                                    if(horse1.isD()==false)
+                                    {
+                                        khane[horse1.getX()][horse1.getY()].setBackground(Color.cyan);
+                                    }
+                                }
+                                else
+                                {
+                                    if(elephant2.isD()==false)
+                                    {
+                                        khane[elephant2.getX()][elephant2.getY()].setBackground(Color.cyan);
+                                    }
+                                    if(tiger2.isD()==false)
+                                    {
+                                        khane[tiger2.getX()][tiger2.getY()].setBackground(Color.cyan);
+                                    }
+                                    if(horse2.isD()==false)
+                                    {
+                                        khane[horse2.getX()][horse2.getY()].setBackground(Color.cyan);
+                                    }
+                                }
+                                JOptionPane.showMessageDialog(null,"Bedone Mohre");
+                                click=true;
+                            }
+                        }
+                        if(click==false)
+                        {
+                            click=true;
+                        }
+                        else
+                        {
+                            click=false;
+                        }
+                        if(score1==0)
+
+                        {
+                            khane[0][0].setVisible(false);
+                            khane[0][1].setVisible(false);
+                            khane[0][2].setVisible(false);
+                            khane[1][0].setVisible(false);
+                            khane[1][1].setVisible(false);
+                            khane[1][2].setVisible(false);
+                            khane[2][0].setVisible(false);
+                            khane[2][1].setVisible(false);
+                            khane[2][2].setVisible(false);
+                            JLabel w=new JLabel("End");
+                            w.setBounds(260,200,130,130);
+
+                            f.add(w);
+                            JOptionPane.showMessageDialog(null,"Player 2 Win");
+                        }
+                        else if(score2==0)
+                        {
+                            khane[0][0].setVisible(false);
+                            khane[0][1].setVisible(false);
+                            khane[0][2].setVisible(false);
+                            khane[1][0].setVisible(false);
+                            khane[1][1].setVisible(false);
+                            khane[1][2].setVisible(false);
+                            khane[2][0].setVisible(false);
+                            khane[2][1].setVisible(false);
+                            khane[2][2].setVisible(false);
+                            JLabel w=new JLabel("End");
+                            w.setBounds(260,200,130,130);
+                            f.add(w);
+
+                            JOptionPane.showMessageDialog(null,"Player 1 Win");
+                        }
+                        else if(getMove()==0)
+                        {
+                            khane[0][0].setVisible(false);
+                            khane[0][1].setVisible(false);
+                            khane[0][2].setVisible(false);
+                            khane[1][0].setVisible(false);
+                            khane[1][1].setVisible(false);
+                            khane[1][2].setVisible(false);
+                            khane[2][0].setVisible(false);
+                            khane[2][1].setVisible(false);
+                            khane[2][2].setVisible(false);
+                            JLabel w=new JLabel("End");
+                            w.setBounds(260,200,130,130);
+                            f.add(w);
+                            JOptionPane.showMessageDialog(null,"No one won");
+                        }
+                    }
+
+                });
+            }
+        }
+        f.setSize(630,660);
+    }
+}
+interface dead
+{
+    boolean getdead();
+}
+interface masafat
+{
+    int getmasafat();
+}
+interface power
+{
+    int getpower();
+
+
+}
+interface pos
+{
+
+}
+class tiger implements masafat,power,dead
+{
+    int x;
+    int y;
+    boolean d=false;
+
+    public boolean isD() {
+        return d;
+    }
+
+    public void setD(boolean d) {
+        this.d = d;
+    }
+
+    @Override
+    public boolean getdead() {
+        if (d==false)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    @Override
+    public int getmasafat() {
+        return 1;
+    }
+    @Override
+    public int getpower() {
+        return 3;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+}
+class elephant implements masafat,power,dead
+{
+    int x;
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public boolean isD() {
+        return d;
+    }
+
+    public void setD(boolean d) {
+        this.d = d;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    int y;
+    boolean d=false;
+    @Override
+    public boolean getdead() {
+        if (d==false)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+    @Override
+    public int getmasafat() {
+        return 2;
+    }
+    @Override
+    public int getpower() {
+        return 2;
+    }
+}
+class horse implements masafat,power,dead
+{
+    int x;
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public boolean isD() {
+        return d;
+    }
+
+    public void setD(boolean d) {
+        this.d = d;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    int y;
+    boolean d=false;
+    @Override
+    public boolean getdead() {
+        if (d==false)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+    @Override
+    public int getmasafat() {
+        return 1;
+    }
+    @Override
+    public int getpower() {
+        return 1;
+    }
+}
